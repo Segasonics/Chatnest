@@ -1,0 +1,91 @@
+:root {
+  --wa-bg: #0b141a;
+  --wa-surface: #111b21;
+  --wa-surface-elevated: #202c33;
+  --wa-border: #2a3942;
+  --wa-text: #e9edef;
+  --wa-muted: #8696a0;
+  --wa-accent: #25d366;
+  --wa-accent-strong: #00a884;
+}
+
+.app-shell-bg {
+  background:
+    radial-gradient(circle at 12% 16%, rgba(37, 211, 102, 0.16), transparent 32%),
+    radial-gradient(circle at 86% 12%, rgba(0, 168, 132, 0.14), transparent 34%),
+    radial-gradient(circle at 64% 84%, rgba(37, 211, 102, 0.09), transparent 36%),
+    linear-gradient(160deg, #091116 8%, #0b141a 52%, #0e171c 100%);
+}
+
+.glass-panel {
+  background: linear-gradient(160deg, rgba(17, 27, 33, 0.86), rgba(16, 28, 34, 0.65));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(42, 57, 66, 0.9);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+}
+
+.electric-border {
+  border: 1px solid transparent;
+  background-image:
+    linear-gradient(var(--wa-surface), var(--wa-surface)),
+    linear-gradient(120deg, rgba(37, 211, 102, 0.78), rgba(0, 168, 132, 0.72));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.chat-surface {
+  background:
+    radial-gradient(circle at 18% 16%, rgba(37, 211, 102, 0.08), transparent 30%),
+    radial-gradient(circle at 78% 84%, rgba(0, 168, 132, 0.09), transparent 34%),
+    linear-gradient(180deg, rgba(10, 18, 23, 0.94), rgba(11, 20, 26, 0.96));
+  border: 1px solid rgba(42, 57, 66, 0.8);
+}
+
+.bubble-in {
+  background: #202c33;
+  color: var(--wa-text);
+}
+
+.bubble-out {
+  background: rgba(37, 211, 102, 0.22);
+  color: #d9ffe9;
+}
+
+.button-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.button-sheen::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.button-sheen:hover::after {
+  left: 130%;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(17, 27, 33, 0.85);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(42, 57, 66, 0.95);
+  border-radius: 999px;
+  border: 2px solid rgba(17, 27, 33, 0.85);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(67, 90, 101, 0.95);
+}

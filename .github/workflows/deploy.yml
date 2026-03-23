@@ -1,0 +1,33 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    name: Deploy to VPS (Docker Compose)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT || 22 }}
+          script: |
+            set -e
+            APP_DIR=/opt/chatnest
+            if [ ! -d "$APP_DIR" ]; then
+              sudo mkdir -p "$APP_DIR"
+              sudo chown -R $USER:$USER "$APP_DIR"
+              git clone https://github.com/${{ github.repository }}.git "$APP_DIR"
+            fi
+            cd "$APP_DIR"
+            git fetch --all
+            git reset --hard origin/main
+            docker compose down
+            docker compose build --pull
+            docker compose up -d
