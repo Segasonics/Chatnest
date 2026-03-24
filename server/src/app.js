@@ -50,6 +50,10 @@ app.get('/health', (_req, res) => {
   res.json({ success: true, status: 'ok' });
 });
 
+app.get('/api/health', (_req, res) => {
+  res.json({ success: true, status: 'ok' });
+});
+
 app.use(notFound);
 app.use(errorHandler);
 
