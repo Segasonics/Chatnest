@@ -12,6 +12,8 @@ services:
     restart: unless-stopped
     env_file:
       - ./server/.env
+    environment:
+      - NODE_ENV=production
     ports:
       - "5000:5000"
     depends_on:
