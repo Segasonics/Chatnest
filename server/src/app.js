@@ -16,6 +16,15 @@ app.set('trust proxy', 1);
 
 app.use(requestLogger);
 applySecurity(app);
+// Redirect legacy non-/api calls to /api equivalents.
+app.use((req, res, next) => {
+  if (req.path.startsWith('/api')) return next();
+  const apiPrefixes = ['/auth', '/users', '/workspaces', '/billing', '/webhooks', '/providers'];
+  if (apiPrefixes.some((prefix) => req.path === prefix || req.path.startsWith(`${prefix}/`))) {
+    return res.redirect(308, `/api${req.originalUrl}`);
+  }
+  return next();
+});
 // Dev-friendly CORS: reflect request origin and allow credentials.
 // Replace with allowlist-based corsOptions for production.
 app.use((req, res, next) => {
